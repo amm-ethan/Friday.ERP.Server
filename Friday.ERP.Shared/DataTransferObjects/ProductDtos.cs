@@ -2,7 +2,6 @@ using Friday.ERP.Shared.RequestFeatures;
 
 namespace Friday.ERP.Shared.DataTransferObjects;
 
-
 public record SuggestedProductPriceViewDto(
     long SalePrice,
     long SalePriceForWholeSale

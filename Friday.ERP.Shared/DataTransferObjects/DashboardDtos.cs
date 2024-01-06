@@ -1,6 +1,5 @@
 namespace Friday.ERP.Shared.DataTransferObjects;
 
-
 public record MonthlySaleFigureViewDto(
     string? Month,
     int Year,

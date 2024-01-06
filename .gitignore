@@ -3,3 +3,5 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+/Friday.ERP.Server/logs/
+/Friday.ERP.Server/wwwroot/product_images/

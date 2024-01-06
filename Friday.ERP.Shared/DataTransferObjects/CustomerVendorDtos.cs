@@ -2,7 +2,6 @@ using Friday.ERP.Shared.RequestFeatures;
 
 namespace Friday.ERP.Shared.DataTransferObjects;
 
-
 public record CustomerVendorCreateDto(
     string Name,
     string? Phone,
@@ -19,7 +18,7 @@ public record CustomerVendorViewDto(
     string? Email,
     string? Address,
     long TotalCreditDebitLeft
-    );
+);
 
 public record CustomerVendorUpdateDto(
     string? Phone,

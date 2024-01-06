@@ -1,6 +1,5 @@
 namespace Friday.ERP.Shared.DataTransferObjects;
 
-
 public record NotificationCreateDto(
     string Heading,
     string Body

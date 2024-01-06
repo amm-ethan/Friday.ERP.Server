@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Friday.ERP.Shared\Friday.ERP.Shared.csproj"/>
+    </ItemGroup>
+
 </Project>

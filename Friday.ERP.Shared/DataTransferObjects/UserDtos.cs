@@ -2,7 +2,6 @@ using Friday.ERP.Shared.RequestFeatures;
 
 namespace Friday.ERP.Shared.DataTransferObjects;
 
-
 public record UserCreateDto(
     string Name,
     string? Phone,
