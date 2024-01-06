@@ -1,0 +1,6 @@
+@Friday.ERP.Server_HostAddress = http://localhost:5259
+
+GET {{Friday.ERP.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
