@@ -91,21 +91,22 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                                 .Item().Text($"ဖုန်း - {invoiceModel.Customer!.Phone}")
                                 .FontSize(10);
                         }
+                        else
+                        {
+                            r.Spacing(1);
+                        }
                     });
                     row.RelativeItem().Column(r =>
                     {
-                        if (invoiceModel.Customer is not null)
-                        {
-                            r
-                                .Item().AlignRight()
-                                .Text($"ဘောင်ချာနံပါတ် - {invoiceModel.InvoiceNo}")
-                                .FontSize(10);
+                        r
+                            .Item().AlignRight()
+                            .Text($"ဘောင်ချာနံပါတ် - {invoiceModel.InvoiceNo}")
+                            .FontSize(10);
 
-                            r
-                                .Item().AlignRight()
-                                .Text($"နေ့စွဲ - {invoiceModel.PurchasedAt:MM/dd/yyyy}")
-                                .FontSize(10);
-                        }
+                        r
+                            .Item().AlignRight()
+                            .Text($"နေ့စွဲ - {invoiceModel.PurchasedAt:MM/dd/yyyy}")
+                            .FontSize(10);
                     });
                 });
 
@@ -128,7 +129,7 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                         row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Customer.TotalCreditDebitLeft} ကျပ်")
                             .FontSize(10);
                     });
-                    var total =  invoiceModel.Total - invoiceModel.Customer.TotalCreditDebitLeft;
+                    var total = invoiceModel.Total - invoiceModel.Customer.TotalCreditDebitLeft;
                     column.Item().AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ပေးရန်စုစုပေါင်း").FontSize(10);
