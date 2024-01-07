@@ -108,6 +108,7 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
         return new SettingViewDto(
             image,
             setting.Name!,
+            setting.Description,
             setting.AddressOne,
             setting.AddressTwo,
             setting.PhoneOne,

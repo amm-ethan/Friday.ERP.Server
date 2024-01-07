@@ -84,6 +84,7 @@ namespace Friday.ERP.Server.Migrations
                     Guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     image = table.Column<string>(type: "longtext", nullable: true),
                     name = table.Column<string>(type: "varchar(256)", nullable: false),
+                    description = table.Column<string>(type: "varchar(256)", nullable: true),
                     address_one = table.Column<string>(type: "varchar(256)", nullable: true),
                     address_two = table.Column<string>(type: "varchar(256)", nullable: true),
                     phone_one = table.Column<string>(type: "varchar(100)", nullable: true),
@@ -377,8 +378,8 @@ namespace Friday.ERP.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "sm_setting",
-                columns: new[] { "Guid", "address_one", "address_two", "default_profit_percent", "default_profit_percent_for_whole_sale", "image", "minimum_stock_margin", "name", "phone_four", "phone_one", "phone_three", "phone_two", "suggest_sale_price" },
-                values: new object[] { new Guid("b1819545-6b5b-4114-8b66-76065037b1de"), "အမှတ်(၃၁), တိုးချဲ့ကမ်းနားလမ်း, မြိတ်တံတားထိပ်, ဖက်တန်းရပ်, မော်လမြိုင်မြို့", "အမှတ်(၁၈), ကျိုက်သန်လန် ဘုရားလမ်း, ရွှေတောင်ရပ်, မော်လမြိုင်မြို့", 15, 10, "logo.png", 10, "MK Trading", "057-24258", "09-446639594", "09-760142884", "09-777308660", true });
+                columns: new[] { "Guid", "address_one", "address_two", "default_profit_percent", "default_profit_percent_for_whole_sale", "description", "image", "minimum_stock_margin", "name", "phone_four", "phone_one", "phone_three", "phone_two", "suggest_sale_price" },
+                values: new object[] { new Guid("b1819545-6b5b-4114-8b66-76065037b1de"), "အမှတ်(၃၁), တိုးချဲ့ကမ်းနားလမ်း, မြိတ်တံတားထိပ်, ဖက်တန်းရပ်, မော်လမြိုင်မြို့", "အမှတ်(၁၈), ကျိုက်သန်လန် ဘုရားလမ်း, ရွှေတောင်ရပ်, မော်လမြိုင်မြို့", 15, 10, "သီဟိုဠ်ဆံ နှင့် မုန့်မျိုးစုံရောင်းဝယ်ရေး", "logo.png", 10, "MK Trading", "057-24258", "09-446639594", "09-760142884", "09-777308660", true });
 
             migrationBuilder.InsertData(
                 table: "am_user",

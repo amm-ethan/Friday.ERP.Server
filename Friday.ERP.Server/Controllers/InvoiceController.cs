@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using QuestPDF.Fluent;
+using Document = Friday.ERP.Server.Utilities.PdfGenerator.InvoiceSale.Document;
 
 namespace Friday.ERP.Server.Controllers;
 
@@ -23,14 +24,14 @@ public class InvoiceController(
 )
     : ControllerBase
 {
-    private readonly string _wwwroot = Path.Combine(env.WebRootPath, "product_images");
+    private readonly string _product_images = Path.Combine(env.WebRootPath, "product_images");
 
     [HttpPost("sales", Name = "CreateSaleInvoice")]
     [ServiceFilter(typeof(GetCurrentUserGuidActionFilter))]
     public async Task<IActionResult> CreateSaleInvoice(InvoiceSaleCreateDto invoiceSaleCreateDto)
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
-        var invoiceSaleViewDto = await service.InvoiceService.CreateInvoiceSale(invoiceSaleCreateDto, _wwwroot);
+        var invoiceSaleViewDto = await service.InvoiceService.CreateInvoiceSale(invoiceSaleCreateDto, _product_images);
 
         if (invoiceSaleCreateDto.CustomerGuid is not null)
             await service.CustomerVendorService.UpdateCustomerVendorCreditDebit(
@@ -62,7 +63,8 @@ public class InvoiceController(
                     JsonConvert.SerializeObject(notificationToSend));
         }
 
-        var document = new InvoiceSaleDocument(invoiceSaleViewDto, env);
+        var settingViewDto = await service.SystemService.GetSettings(env.WebRootPath);
+        var document = new Document(invoiceSaleViewDto, settingViewDto);
 
         var pdfBytes = document.GeneratePdf();
         var ms = new MemoryStream(pdfBytes);
@@ -74,7 +76,7 @@ public class InvoiceController(
     public async Task<IActionResult> GetSaleInvoiceByGuid(Guid guid)
     {
         var dataToReturn =
-            await service.InvoiceService.GetInvoiceSaleByGuid(guid, _wwwroot);
+            await service.InvoiceService.GetInvoiceSaleByGuid(guid, _product_images);
         return Ok(dataToReturn);
     }
 
@@ -84,7 +86,7 @@ public class InvoiceController(
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
         var dataToReturn =
-            await service.InvoiceService.UpdateInvoiceSale(guid, invoiceSaleUpdateDto, _wwwroot, userGuid!);
+            await service.InvoiceService.UpdateInvoiceSale(guid, invoiceSaleUpdateDto, _product_images, userGuid!);
         return Ok(dataToReturn);
     }
 
@@ -138,7 +140,7 @@ public class InvoiceController(
     public async Task<IActionResult> CreatePurchaseInvoice(InvoicePurchaseCreateDto invoicePurchaseCreateDto)
     {
         var saleInvoiceToReturn =
-            await service.InvoiceService.CreateInvoicePurchase(invoicePurchaseCreateDto, _wwwroot);
+            await service.InvoiceService.CreateInvoicePurchase(invoicePurchaseCreateDto, _product_images);
         await service.CustomerVendorService.UpdateCustomerVendorCreditDebit(
             invoicePurchaseCreateDto.VendorGuid,
             invoicePurchaseCreateDto.CreditDebitLeft);
@@ -149,7 +151,7 @@ public class InvoiceController(
     public async Task<IActionResult> GetPurchaseInvoiceByGuid(Guid guid)
     {
         var dataToReturn =
-            await service.InvoiceService.GetInvoicePurchaseByGuid(guid, _wwwroot);
+            await service.InvoiceService.GetInvoicePurchaseByGuid(guid, _product_images);
         return Ok(dataToReturn);
     }
 
@@ -161,7 +163,7 @@ public class InvoiceController(
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
         var dataToReturn =
-            await service.InvoiceService.UpdateInvoicePurchase(guid, invoicePurchaseUpdateDto, _wwwroot, userGuid!);
+            await service.InvoiceService.UpdateInvoicePurchase(guid, invoicePurchaseUpdateDto, _product_images, userGuid!);
         return Ok(dataToReturn);
     }
 

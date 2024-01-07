@@ -174,6 +174,7 @@ public class RepositoryContext(DbContextOptions<RepositoryContext> options) : Db
             Guid = Guid.Parse("b1819545-6b5b-4114-8b66-76065037b1de"),
             Image = "logo.png",
             Name = "MK Trading",
+            Description = "သီဟိုဠ်ဆံ နှင့် မုန့်မျိုးစုံရောင်းဝယ်ရေး",
             AddressOne = "အမှတ်(၃၁), တိုးချဲ့ကမ်းနားလမ်း, မြိတ်တံတားထိပ်, ဖက်တန်းရပ်, မော်လမြိုင်မြို့",
             AddressTwo = "အမှတ်(၁၈), ကျိုက်သန်လန် ဘုရားလမ်း, ရွှေတောင်ရပ်, မော်လမြိုင်မြို့",
             PhoneOne = "09-446639594",

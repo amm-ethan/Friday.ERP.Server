@@ -24,7 +24,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Friday.ERP.Server.dll"]
-
-#RUN apt-get update && \
-#    apt-get install -y libfontconfig1 libgdiplus && \
-#    rm -rf /var/lib/apt/lists/* \

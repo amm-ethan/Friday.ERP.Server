@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using NLog;
+using QuestPDF.Drawing;
 using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +75,7 @@ try
     });
     
     QuestPDF.Settings.License = LicenseType.Community;
+    FontManager.RegisterFont(File.OpenRead("wwwroot/mm3-multi-os.ttf"));
     
     var app = builder.Build();
 

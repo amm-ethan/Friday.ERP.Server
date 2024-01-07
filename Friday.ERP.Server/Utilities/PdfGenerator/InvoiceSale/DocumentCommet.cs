@@ -2,17 +2,16 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
-namespace Friday.ERP.Server.Utilities.PdfGenerator;
+namespace Friday.ERP.Server.Utilities.PdfGenerator.InvoiceSale;
 
-public class CommentComponent(string comment) : IComponent
+public class DocumentRemark(string comment) : IComponent
 {
     public void Compose(IContainer container)
     {
         container.ShowEntire().Background(Colors.Grey.Lighten3).Padding(10).Column(column =>
         {
-            column.Spacing(5);
-            column.Item().Text("Remark").FontSize(14).SemiBold();
-            column.Item().Text(comment);
+            column.Item().Text("မှတ်ချက်").FontSize(10);
+            column.Item().Text(comment).FontSize(10);
         });
     }
 }

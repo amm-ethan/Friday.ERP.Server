@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Friday.ERP.Server.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240106114230_Initial")]
+    [Migration("20240107025530_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -634,6 +634,10 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("int")
                         .HasColumnName("default_profit_percent_for_whole_sale");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(256)")
+                        .HasColumnName("description");
+
                     b.Property<string>("Image")
                         .HasColumnType("longtext")
                         .HasColumnName("image");
@@ -679,6 +683,7 @@ namespace Friday.ERP.Server.Migrations
                             AddressTwo = "အမှတ်(၁၈), ကျိုက်သန်လန် ဘုရားလမ်း, ရွှေတောင်ရပ်, မော်လမြိုင်မြို့",
                             DefaultProfitPercent = 15,
                             DefaultProfitPercentForWholeSale = 10,
+                            Description = "သီဟိုဠ်ဆံ နှင့် မုန့်မျိုးစုံရောင်းဝယ်ရေး",
                             Image = "logo.png",
                             MinimumStockMargin = 10,
                             Name = "MK Trading",

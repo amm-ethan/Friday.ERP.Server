@@ -14,6 +14,9 @@ public class Setting
     [Column("name", TypeName = "varchar(256)")]
     public string? Name { get; set; }
 
+    [Column("description", TypeName = "varchar(256)")]
+    public string? Description { get; set; }
+    
     [Column("address_one", TypeName = "varchar(256)")]
     public string? AddressOne { get; set; }
 
