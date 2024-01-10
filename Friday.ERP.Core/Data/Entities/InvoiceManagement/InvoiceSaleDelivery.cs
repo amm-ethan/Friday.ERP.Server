@@ -10,18 +10,6 @@ public class InvoiceSaleDelivery
 {
     [Key] public Guid Guid { get; set; }
 
-    [Required]
-    [Column("address", TypeName = "varchar(50)")]
-    public string? Address { get; set; }
-
-    [Required]
-    [Column("contact_person", TypeName = "varchar(50)")]
-    public string? ContactPerson { get; set; }
-
-    [Required]
-    [Column("contact_phone", TypeName = "varchar(50)")]
-    public string? ContactPhone { get; set; }
-
     [Column("delivery_service_name", TypeName = "varchar(50)")]
     public string? DeliveryServiceName { get; set; }
 
@@ -34,23 +22,16 @@ public class InvoiceSaleDelivery
     [Column("remark", TypeName = "varchar(50)")]
     public string? Remark { get; set; }
 
-    [Column("delivery_fees", TypeName = "varchar(50)")]
-    public long? DeliveryFees { get; set; }
-
     public static InvoiceSaleDelivery FromInvoiceSaleDeliveryCreateDto(
         InvoiceSaleDeliveryCreateDto invoiceSaleProductCreateDto)
     {
         return new InvoiceSaleDelivery
         {
             Guid = Guid.NewGuid(),
-            Address = invoiceSaleProductCreateDto.Address,
-            ContactPerson = invoiceSaleProductCreateDto.ContactPerson,
-            ContactPhone = invoiceSaleProductCreateDto.ContactPhone,
             DeliveryServiceName = invoiceSaleProductCreateDto.DeliveryServiceName,
             DeliveryContactPerson = invoiceSaleProductCreateDto.DeliveryContactPerson,
             DeliveryContactPhone = invoiceSaleProductCreateDto.DeliveryContactPhone,
             Remark = invoiceSaleProductCreateDto.Remark,
-            DeliveryFees = invoiceSaleProductCreateDto.DeliveryFees
         };
     }
 

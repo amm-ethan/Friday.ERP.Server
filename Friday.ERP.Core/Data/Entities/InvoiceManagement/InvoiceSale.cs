@@ -21,8 +21,13 @@ public class InvoiceSale
     [Required] [Column("sub_total")] public long SubTotal { get; set; }
 
     [Column("discount")] public long Discount { get; set; }
+    [Column("discount_type")] public DiscountTypeEnum? DiscountType { get; set; }
 
-    [Required] [Column("total")] public long Total { get; set; }
+    [Column("delivery_fees")] public long DeliveryFees { get; set; }
+
+    [Column("other_fees")] public long OtherFees { get; set; }
+
+    [Required] [Column("grand_total")] public long GrandTotal { get; set; }
 
     [Required] [Column("paid_total")] public long PaidTotal { get; set; }
 
@@ -31,8 +36,6 @@ public class InvoiceSale
     [Required]
     [Column("credit_debit_left")]
     public long CreditDebitLeft { get; set; }
-
-    [Column("discount_type")] public DiscountTypeEnum? DiscountType { get; set; }
 
     public static InvoiceSale FromInvoiceSaleCreateDto(InvoiceSaleCreateDto invoiceSaleCreateDto)
     {

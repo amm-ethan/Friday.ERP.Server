@@ -15,7 +15,7 @@ public class InvoicePurchaseProduct
 
     [Required] [Column("purchased_price")] public long PurchasedPrice { get; set; }
 
-    [Required] [Column("total_price")] public long TotalPrice { get; set; }
+    [Required] [Column("total")] public long Total { get; set; }
 
     [Required] [Column("purchased_at")] public DateTime PurchasedAt { get; set; }
 

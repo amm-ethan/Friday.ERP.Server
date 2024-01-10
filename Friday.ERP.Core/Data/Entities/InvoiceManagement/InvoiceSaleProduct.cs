@@ -13,7 +13,7 @@ public class InvoiceSaleProduct
 
     [Required] [Column("quantity")] public int Quantity { get; set; }
 
-    [Required] [Column("total_price")] public long TotalPrice { get; set; }
+    [Required] [Column("total")] public long Total { get; set; }
 
     public static InvoiceSaleProduct FromInvoiceSaleProductCreateDto(
         InvoiceSaleProductCreateDto invoiceSaleProductCreateDto)

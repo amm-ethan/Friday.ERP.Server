@@ -21,8 +21,12 @@ public class InvoicePurchase
     [Column("discount")] public long Discount { get; set; }
 
     [Column("discount_type")] public DiscountType? DiscountType { get; set; }
+    
+    [Column("delivery_fees")] public long DeliveryFees { get; set; }
+    
+    [Column("other_fees")] public long OtherFees { get; set; }
 
-    [Required] [Column("total")] public long Total { get; set; }
+    [Required] [Column("grand_total")] public long GrandTotal { get; set; }
 
     [Required] [Column("paid_total")] public long PaidTotal { get; set; }
 

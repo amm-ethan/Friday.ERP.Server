@@ -162,14 +162,10 @@ public record InvoiceSaleDeliveryUpdateDto(
 );
 
 public record InvoiceSaleDeliveryCreateDto(
-    string Address,
-    string ContactPerson,
-    string ContactPhone,
     string? DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
-    string? Remark,
-    long? DeliveryFees
+    string? Remark
 );
 
 public record InvoiceSaleTableViewDto(
