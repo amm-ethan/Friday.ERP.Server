@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using NLog;
+using QuestPDF;
 using QuestPDF.Drawing;
 using QuestPDF.Infrastructure;
 
@@ -73,10 +74,10 @@ try
         opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
             new[] { "application/octet-stream" });
     });
-    
-    QuestPDF.Settings.License = LicenseType.Community;
+
+    Settings.License = LicenseType.Community;
     FontManager.RegisterFont(File.OpenRead("wwwroot/mm3-multi-os.ttf"));
-    
+
     var app = builder.Build();
 
     app.MapHealthChecks("/");
@@ -114,7 +115,7 @@ try
     app.MapControllers();
 
     app.MapHub<NotificationHub>("/notification-hub");
-    
+
     app.Run();
 }
 catch (Exception ex)

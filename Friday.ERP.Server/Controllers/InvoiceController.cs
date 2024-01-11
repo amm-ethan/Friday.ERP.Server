@@ -2,7 +2,6 @@
 using Friday.ERP.Core.IServices.Hubs;
 using Friday.ERP.Server.ActionFilters;
 using Friday.ERP.Server.Hubs;
-using Friday.ERP.Server.Utilities.PdfGenerator.InvoiceSale;
 using Friday.ERP.Shared.DataTransferObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +23,14 @@ public class InvoiceController(
 )
     : ControllerBase
 {
-    private readonly string _product_images = Path.Combine(env.WebRootPath, "product_images");
+    private readonly string _productImages = Path.Combine(env.WebRootPath, "product_images");
 
     [HttpPost("sales", Name = "CreateSaleInvoice")]
     [ServiceFilter(typeof(GetCurrentUserGuidActionFilter))]
     public async Task<IActionResult> CreateSaleInvoice(InvoiceSaleCreateDto invoiceSaleCreateDto)
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
-        var invoiceSaleViewDto = await service.InvoiceService.CreateInvoiceSale(invoiceSaleCreateDto, _product_images);
+        var invoiceSaleViewDto = await service.InvoiceService.CreateInvoiceSale(invoiceSaleCreateDto, _productImages);
 
         if (invoiceSaleCreateDto.CustomerGuid is not null)
             await service.CustomerVendorService.UpdateCustomerVendorCreditDebit(
@@ -76,7 +75,7 @@ public class InvoiceController(
     public async Task<IActionResult> GetSaleInvoiceByGuid(Guid guid)
     {
         var dataToReturn =
-            await service.InvoiceService.GetInvoiceSaleByGuid(guid, _product_images);
+            await service.InvoiceService.GetInvoiceSaleByGuid(guid, _productImages);
         return Ok(dataToReturn);
     }
 
@@ -86,7 +85,7 @@ public class InvoiceController(
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
         var dataToReturn =
-            await service.InvoiceService.UpdateInvoiceSale(guid, invoiceSaleUpdateDto, _product_images, userGuid!);
+            await service.InvoiceService.UpdateInvoiceSale(guid, invoiceSaleUpdateDto, _productImages, userGuid!);
         return Ok(dataToReturn);
     }
 
@@ -140,7 +139,7 @@ public class InvoiceController(
     public async Task<IActionResult> CreatePurchaseInvoice(InvoicePurchaseCreateDto invoicePurchaseCreateDto)
     {
         var saleInvoiceToReturn =
-            await service.InvoiceService.CreateInvoicePurchase(invoicePurchaseCreateDto, _product_images);
+            await service.InvoiceService.CreateInvoicePurchase(invoicePurchaseCreateDto, _productImages);
         await service.CustomerVendorService.UpdateCustomerVendorCreditDebit(
             invoicePurchaseCreateDto.VendorGuid,
             invoicePurchaseCreateDto.CreditDebitLeft);
@@ -151,7 +150,7 @@ public class InvoiceController(
     public async Task<IActionResult> GetPurchaseInvoiceByGuid(Guid guid)
     {
         var dataToReturn =
-            await service.InvoiceService.GetInvoicePurchaseByGuid(guid, _product_images);
+            await service.InvoiceService.GetInvoicePurchaseByGuid(guid, _productImages);
         return Ok(dataToReturn);
     }
 
@@ -163,7 +162,8 @@ public class InvoiceController(
     {
         var userGuid = HttpContext.Items["current_user_id"] as string;
         var dataToReturn =
-            await service.InvoiceService.UpdateInvoicePurchase(guid, invoicePurchaseUpdateDto, _product_images, userGuid!);
+            await service.InvoiceService.UpdateInvoicePurchase(guid, invoicePurchaseUpdateDto, _productImages,
+                userGuid!);
         return Ok(dataToReturn);
     }
 

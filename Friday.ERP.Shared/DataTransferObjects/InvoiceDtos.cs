@@ -9,7 +9,7 @@ public record InvoicePurchaseProductCreateDto(
     Guid ProductGuid,
     long BuyPrice,
     int Quantity,
-    long TotalPrice);
+    long Total);
 
 public record InvoicePurchaseProductViewDto(
     Guid Guid,
@@ -18,13 +18,15 @@ public record InvoicePurchaseProductViewDto(
     string ProductName,
     int Quantity,
     long BuyPrice,
-    long TotalPrice);
+    long Total);
 
 public record InvoicePurchaseCreateDto(
     long SubTotal,
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     bool IsPaid,
@@ -36,9 +38,11 @@ public record InvoicePurchaseViewDto(
     Guid Guid,
     string InvoiceNo,
     long SubTotal,
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     bool IsPaid,
@@ -51,7 +55,9 @@ public record InvoicePurchaseViewDto(
 public record InvoicePurchaseUpdateDto(
     long? Discount,
     DiscountTypeEnum? DiscountType,
+    long? DeliveryFees,
     long? Total,
+    long? GrandTotal,
     long? PaidTotal,
     long? CreditDebitLeft,
     bool? IsPaid);
@@ -59,7 +65,7 @@ public record InvoicePurchaseUpdateDto(
 public record InvoicePurchaseTableViewDto(
     Guid Guid,
     string InvoiceNo,
-    long Total,
+    long GrandTotal,
     Guid VendorGuid,
     string VendorName,
     DateTime PurchasedAt
@@ -70,9 +76,11 @@ public record InvoiceIdViewDto(
 );
 
 public record InvoicePurchasePreCreateDto(
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     bool IsPaid,
@@ -86,7 +94,7 @@ public record InvoicePurchasePreCreateDto(
 public record InvoiceSaleProductCreateDto(
     Guid ProductGuid,
     int Quantity,
-    long TotalPrice,
+    long Total,
     Guid ProducePriceGuid);
 
 public record InvoiceSaleProductViewDto(
@@ -95,7 +103,7 @@ public record InvoiceSaleProductViewDto(
     string? Image,
     string ProductName,
     int Quantity,
-    long TotalPrice,
+    long Total,
     Guid ProducePriceGuid,
     long ProducePriceSalePrice,
     bool? ProducePriceIsWholeSale
@@ -103,9 +111,11 @@ public record InvoiceSaleProductViewDto(
 
 public record InvoiceSaleCreateDto(
     long SubTotal,
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     string? Remark,
@@ -118,9 +128,11 @@ public record InvoiceSaleViewDto(
     Guid Guid,
     string InvoiceNo,
     long SubTotal,
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     string? Remark,
@@ -133,36 +145,30 @@ public record InvoiceSaleViewDto(
 public record InvoiceSaleUpdateDto(
     long? Discount,
     DiscountTypeEnum? DiscountType,
+    long? DeliveryFees,
     long? Total,
+    long? GrandTotal,
     long? PaidTotal,
     long? CreditDebitLeft
 );
 
 public record InvoiceSaleDeliveryViewDto(
     Guid Guid,
-    string Address,
-    string ContactPerson,
-    string ContactPhone,
-    string? DeliveryServiceName,
+    string DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
-    string? Remark,
-    long? DeliveryFees
+    string? Remark
 );
 
 public record InvoiceSaleDeliveryUpdateDto(
-    string? Address,
-    string? ContactPerson,
-    string? ContactPhone,
     string? DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
-    string? Remark,
-    long? DeliveryFees
+    string? Remark
 );
 
 public record InvoiceSaleDeliveryCreateDto(
-    string? DeliveryServiceName,
+    string DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
     string? Remark
@@ -171,16 +177,18 @@ public record InvoiceSaleDeliveryCreateDto(
 public record InvoiceSaleTableViewDto(
     Guid Guid,
     string InvoiceNo,
-    long Total,
+    long GrandTotal,
     Guid? CustomerGuid,
     string? CustomerName,
     DateTime PurchasedAt
 );
 
 public record InvoiceSalePreCreateDto(
-    long? Discount,
+    long Discount,
     DiscountTypeEnum? DiscountType,
+    long DeliveryFees,
     long Total,
+    long GrandTotal,
     long PaidTotal,
     long CreditDebitLeft,
     string? Remark

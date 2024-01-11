@@ -10,11 +10,12 @@ public class DocumentTable(List<InvoiceSaleProductViewDto> models) : IComponent
     public void Compose(IContainer container)
     {
         var style = TextStyle.Default.SemiBold().FontSize(8);
+
         static IContainer CellStyle(IContainer container)
         {
             return container.Border(1).BorderColor(Colors.Grey.Darken1).PaddingVertical(5);
         }
-        
+
         container.Table(table =>
         {
             table.ColumnsDefinition(columns =>
@@ -43,7 +44,7 @@ public class DocumentTable(List<InvoiceSaleProductViewDto> models) : IComponent
                 table.Cell().Element(CellStyle).AlignCenter().Text(item.ProductName).Style(style);
                 table.Cell().Element(CellStyle).AlignCenter().Text($"{item.Quantity} ခု").Style(style);
                 table.Cell().Element(CellStyle).AlignCenter().Text($"{item.ProducePriceSalePrice}").Style(style);
-                table.Cell().Element(CellStyle).AlignCenter().Text($"{item.TotalPrice}").Style(style);
+                table.Cell().Element(CellStyle).AlignCenter().Text($"{item.Total}").Style(style);
             }
         });
     }

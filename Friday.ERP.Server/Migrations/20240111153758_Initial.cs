@@ -135,7 +135,9 @@ namespace Friday.ERP.Server.Migrations
                     sub_total = table.Column<long>(type: "bigint", nullable: false),
                     discount = table.Column<long>(type: "bigint", nullable: false),
                     discount_type = table.Column<int>(type: "int", nullable: true),
+                    delivery_fees = table.Column<long>(type: "bigint", nullable: false),
                     total = table.Column<long>(type: "bigint", nullable: false),
+                    grand_total = table.Column<long>(type: "bigint", nullable: false),
                     paid_total = table.Column<long>(type: "bigint", nullable: false),
                     remark = table.Column<string>(type: "longtext", nullable: true),
                     credit_debit_left = table.Column<long>(type: "bigint", nullable: false),
@@ -164,11 +166,13 @@ namespace Friday.ERP.Server.Migrations
                     purchased_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     sub_total = table.Column<long>(type: "bigint", nullable: false),
                     discount = table.Column<long>(type: "bigint", nullable: false),
+                    discount_type = table.Column<int>(type: "int", nullable: true),
+                    delivery_fees = table.Column<long>(type: "bigint", nullable: false),
                     total = table.Column<long>(type: "bigint", nullable: false),
+                    grand_total = table.Column<long>(type: "bigint", nullable: false),
                     paid_total = table.Column<long>(type: "bigint", nullable: false),
                     remark = table.Column<string>(type: "longtext", nullable: true),
                     credit_debit_left = table.Column<long>(type: "bigint", nullable: false),
-                    discount_type = table.Column<int>(type: "int", nullable: true),
                     customer_guid = table.Column<Guid>(type: "char(36)", nullable: true)
                 },
                 constraints: table =>
@@ -261,14 +265,10 @@ namespace Friday.ERP.Server.Migrations
                 columns: table => new
                 {
                     Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    address = table.Column<string>(type: "varchar(50)", nullable: false),
-                    contact_person = table.Column<string>(type: "varchar(50)", nullable: false),
-                    contact_phone = table.Column<string>(type: "varchar(50)", nullable: false),
-                    delivery_service_name = table.Column<string>(type: "varchar(50)", nullable: true),
+                    delivery_service_name = table.Column<string>(type: "varchar(50)", nullable: false),
                     delivery_contact_person = table.Column<string>(type: "varchar(50)", nullable: true),
                     delivery_contact_phone = table.Column<string>(type: "varchar(50)", nullable: true),
                     remark = table.Column<string>(type: "varchar(50)", nullable: true),
-                    delivery_fees = table.Column<string>(type: "varchar(50)", nullable: true),
                     invoice_sale_guid = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
@@ -313,7 +313,7 @@ namespace Friday.ERP.Server.Migrations
                     Guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     purchased_price = table.Column<long>(type: "bigint", nullable: false),
-                    total_price = table.Column<long>(type: "bigint", nullable: false),
+                    total = table.Column<long>(type: "bigint", nullable: false),
                     purchased_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     product_guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     invoice_purchase_guid = table.Column<Guid>(type: "char(36)", nullable: false)
@@ -342,7 +342,7 @@ namespace Friday.ERP.Server.Migrations
                 {
                     Guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
-                    total_price = table.Column<long>(type: "bigint", nullable: false),
+                    total = table.Column<long>(type: "bigint", nullable: false),
                     product_guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     invoice_sale_guid = table.Column<Guid>(type: "char(36)", nullable: false),
                     product_price_guid = table.Column<Guid>(type: "char(36)", nullable: false)

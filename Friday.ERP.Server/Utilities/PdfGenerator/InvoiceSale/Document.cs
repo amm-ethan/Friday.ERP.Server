@@ -115,6 +115,13 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                     row.RelativeItem().Component(new DocumentTable(invoiceModel.SoldProducts));
                 });
 
+                if (invoiceModel.Customer is not null)
+                    column.Item().PaddingTop(15).AlignRight().Row(row =>
+                    {
+                        row.ConstantItem(100).AlignRight().Text("လုပ်သားခ").FontSize(10);
+                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.DeliveryFees} ကျပ်").FontSize(10);
+                    });
+
                 column.Item().PaddingTop(15).AlignRight().Row(row =>
                 {
                     row.ConstantItem(100).AlignRight().Text("စုစုပေါင်း").FontSize(10);
@@ -129,11 +136,11 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                         row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Customer.TotalCreditDebitLeft} ကျပ်")
                             .FontSize(10);
                     });
-                    var total = invoiceModel.Total - invoiceModel.Customer.TotalCreditDebitLeft;
+
                     column.Item().AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ပေးရန်စုစုပေါင်း").FontSize(10);
-                        row.ConstantItem(100).AlignRight().Text($"{total} ကျပ်").FontSize(10);
+                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.GrandTotal} ကျပ်").FontSize(10);
                     });
                 }
                 else
@@ -152,21 +159,17 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                 });
 
                 if (invoiceModel.Customer is not null)
-                {
                     column.Item().AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ကျန်ငွေစုစုပေါင်း").FontSize(10);
                         row.ConstantItem(100).AlignRight().Text($"{invoiceModel.CreditDebitLeft} ကျပ်").FontSize(10);
                     });
-                }
 
                 if (invoiceModel.Remark is not null)
-                {
                     column.Item().PaddingTop(10).Row(row =>
                     {
                         row.RelativeItem().Component(new DocumentRemark(invoiceModel.Remark));
                     });
-                }
             }
         );
     }

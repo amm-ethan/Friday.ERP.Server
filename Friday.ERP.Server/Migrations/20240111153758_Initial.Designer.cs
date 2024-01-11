@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Friday.ERP.Server.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20240107025530_Initial")]
+    [Migration("20240111153758_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -320,6 +320,10 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("credit_debit_left");
 
+                    b.Property<long>("DeliveryFees")
+                        .HasColumnType("bigint")
+                        .HasColumnName("delivery_fees");
+
                     b.Property<long>("Discount")
                         .HasColumnType("bigint")
                         .HasColumnName("discount");
@@ -327,6 +331,10 @@ namespace Friday.ERP.Server.Migrations
                     b.Property<int?>("DiscountType")
                         .HasColumnType("int")
                         .HasColumnName("discount_type");
+
+                    b.Property<long>("GrandTotal")
+                        .HasColumnType("bigint")
+                        .HasColumnName("grand_total");
 
                     b.Property<string>("InvoiceNo")
                         .IsRequired()
@@ -396,9 +404,9 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("int")
                         .HasColumnName("quantity");
 
-                    b.Property<long>("TotalPrice")
+                    b.Property<long>("Total")
                         .HasColumnType("bigint")
-                        .HasColumnName("total_price");
+                        .HasColumnName("total");
 
                     b.HasKey("Guid");
 
@@ -423,6 +431,10 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("customer_guid");
 
+                    b.Property<long>("DeliveryFees")
+                        .HasColumnType("bigint")
+                        .HasColumnName("delivery_fees");
+
                     b.Property<long>("Discount")
                         .HasColumnType("bigint")
                         .HasColumnName("discount");
@@ -430,6 +442,10 @@ namespace Friday.ERP.Server.Migrations
                     b.Property<int?>("DiscountType")
                         .HasColumnType("int")
                         .HasColumnName("discount_type");
+
+                    b.Property<long>("GrandTotal")
+                        .HasColumnType("bigint")
+                        .HasColumnName("grand_total");
 
                     b.Property<string>("InvoiceNo")
                         .IsRequired()
@@ -469,21 +485,6 @@ namespace Friday.ERP.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("address");
-
-                    b.Property<string>("ContactPerson")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("contact_person");
-
-                    b.Property<string>("ContactPhone")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("contact_phone");
-
                     b.Property<string>("DeliveryContactPerson")
                         .HasColumnType("varchar(50)")
                         .HasColumnName("delivery_contact_person");
@@ -492,11 +493,8 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("varchar(50)")
                         .HasColumnName("delivery_contact_phone");
 
-                    b.Property<string>("DeliveryFees")
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("delivery_fees");
-
                     b.Property<string>("DeliveryServiceName")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("delivery_service_name");
 
@@ -539,9 +537,9 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnType("int")
                         .HasColumnName("quantity");
 
-                    b.Property<long>("TotalPrice")
+                    b.Property<long>("Total")
                         .HasColumnType("bigint")
-                        .HasColumnName("total_price");
+                        .HasColumnName("total");
 
                     b.HasKey("Guid");
 

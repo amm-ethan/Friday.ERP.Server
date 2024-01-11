@@ -101,8 +101,12 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.Discount = invoicePurchaseUpdateDto.Discount ?? 0;
         if (invoicePurchaseUpdateDto.DiscountType is not null)
             invoice.DiscountType = invoicePurchaseUpdateDto.DiscountType;
+        if (invoicePurchaseUpdateDto.DeliveryFees is not null)
+            invoice.DeliveryFees = invoicePurchaseUpdateDto.DeliveryFees ?? 0;
         if (invoicePurchaseUpdateDto.Total is not null)
             invoice.Total = invoicePurchaseUpdateDto.Total ?? 0;
+        if (invoicePurchaseUpdateDto.GrandTotal is not null)
+            invoice.GrandTotal = invoicePurchaseUpdateDto.GrandTotal ?? 0;
         if (invoicePurchaseUpdateDto.PaidTotal is not null)
             invoice.PaidTotal = invoicePurchaseUpdateDto.PaidTotal ?? 0;
         if (invoicePurchaseUpdateDto.CreditDebitLeft is not null)
@@ -206,8 +210,12 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.Discount = invoiceSaleUpdateDto.Discount ?? 0;
         if (invoiceSaleUpdateDto.DiscountType is not null)
             invoice.DiscountType = invoiceSaleUpdateDto.DiscountType;
+        if (invoiceSaleUpdateDto.DeliveryFees is not null)
+            invoice.DeliveryFees = invoiceSaleUpdateDto.DeliveryFees ?? 0;
         if (invoiceSaleUpdateDto.Total is not null)
             invoice.Total = invoiceSaleUpdateDto.Total ?? 0;
+        if (invoiceSaleUpdateDto.GrandTotal is not null)
+            invoice.GrandTotal = invoiceSaleUpdateDto.GrandTotal ?? 0;
         if (invoiceSaleUpdateDto.PaidTotal is not null)
             invoice.PaidTotal = invoiceSaleUpdateDto.PaidTotal ?? 0;
         if (invoiceSaleUpdateDto.CreditDebitLeft is not null)
@@ -240,12 +248,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             throw new ObjectNotFoundByFilterException("Guid", "InvoiceSaleDelivery",
                 guid.ToString());
 
-        if (invoiceSaleDeliveryUpdateDto.Address is not null)
-            deliveryInfo.Address = invoiceSaleDeliveryUpdateDto.Address;
-        if (invoiceSaleDeliveryUpdateDto.ContactPerson is not null)
-            deliveryInfo.ContactPerson = invoiceSaleDeliveryUpdateDto.ContactPerson;
-        if (invoiceSaleDeliveryUpdateDto.ContactPhone is not null)
-            deliveryInfo.ContactPhone = invoiceSaleDeliveryUpdateDto.ContactPhone;
         if (invoiceSaleDeliveryUpdateDto.DeliveryServiceName is not null)
             deliveryInfo.DeliveryServiceName = invoiceSaleDeliveryUpdateDto.DeliveryServiceName;
         if (invoiceSaleDeliveryUpdateDto.DeliveryContactPerson is not null)
@@ -254,8 +256,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             deliveryInfo.DeliveryContactPhone = invoiceSaleDeliveryUpdateDto.DeliveryContactPhone;
         if (invoiceSaleDeliveryUpdateDto.Remark is not null)
             deliveryInfo.Remark = invoiceSaleDeliveryUpdateDto.Remark;
-        if (invoiceSaleDeliveryUpdateDto.DeliveryFees is not null)
-            deliveryInfo.DeliveryFees = invoiceSaleDeliveryUpdateDto.DeliveryFees;
 
         await repository.SaveAsync();
         logger.LogInfo($"Invoice Sale {deliveryInfo.Guid} is Updated by UserId {currentUserGuid}");
@@ -324,7 +324,7 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
         (
             invoice.Guid,
             invoice.InvoiceNo!,
-            invoice.Total,
+            invoice.GrandTotal,
             invoice.Vendor!.Guid,
             invoice.Vendor!.Name!,
             invoice.PurchasedAt
@@ -356,19 +356,9 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
                     product.Product!.Name!,
                     product.Quantity,
                     product.PurchasedPrice,
-                    product.TotalPrice
+                    product.Total
                 ));
         }
-
-        // var purchasedProducts = invoice.PurchasedProducts!.Select(purchasedProduct => new InvoicePurchaseProductViewDto(
-        //     purchasedProduct.Guid,
-        // purchasedProduct.Product!.Guid,
-        //     purchasedProduct.Product.Image,
-        //     purchasedProduct.Product!.Name!,
-        // purchasedProduct.Quantity,
-        //     purchasedProduct.PurchasedPrice,
-        // purchasedProduct.TotalPrice
-        // )).ToList();
 
         return new InvoicePurchaseViewDto
         (
@@ -377,7 +367,9 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.SubTotal,
             invoice.Discount,
             invoice.DiscountType,
+            invoice.DeliveryFees,
             invoice.Total,
+            invoice.GrandTotal,
             invoice.PaidTotal,
             invoice.CreditDebitLeft,
             invoice.IsPaid,
@@ -412,7 +404,7 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
         (
             invoice.Guid,
             invoice.InvoiceNo!,
-            invoice.Total,
+            invoice.GrandTotal,
             invoice.Customer?.Guid,
             invoice.Customer?.Name!,
             invoice.PurchasedAt
@@ -424,14 +416,10 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
         return new InvoiceSaleDeliveryViewDto
         (
             invoiceSaleDelivery.Guid,
-            invoiceSaleDelivery.Address!,
-            invoiceSaleDelivery.ContactPerson!,
-            invoiceSaleDelivery.ContactPhone!,
-            invoiceSaleDelivery.DeliveryServiceName,
+            invoiceSaleDelivery.DeliveryServiceName!,
             invoiceSaleDelivery.DeliveryContactPerson,
             invoiceSaleDelivery.DeliveryContactPhone,
-            invoiceSaleDelivery.Remark,
-            invoiceSaleDelivery.DeliveryFees
+            invoiceSaleDelivery.Remark
         );
     }
 
@@ -459,7 +447,7 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
                     image,
                     product.Product!.Name!,
                     product.Quantity,
-                    product.TotalPrice,
+                    product.Total,
                     product.ProductPrice!.Guid,
                     product.ProductPrice.SalePrice,
                     product.ProductPrice.IsWholeSale
@@ -473,7 +461,9 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.SubTotal,
             invoice.Discount,
             invoice.DiscountType,
+            invoice.DeliveryFees,
             invoice.Total,
+            invoice.GrandTotal,
             invoice.PaidTotal,
             invoice.CreditDebitLeft,
             invoice.Remark,

@@ -23,7 +23,7 @@ public class InvoiceSaleProduct
             Guid = Guid.NewGuid(),
             ProductGuid = invoiceSaleProductCreateDto.ProductGuid,
             Quantity = invoiceSaleProductCreateDto.Quantity,
-            TotalPrice = invoiceSaleProductCreateDto.TotalPrice
+            Total = invoiceSaleProductCreateDto.Total
         };
     }
 

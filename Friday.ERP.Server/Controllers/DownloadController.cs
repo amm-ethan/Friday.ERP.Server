@@ -1,5 +1,4 @@
 using Friday.ERP.Core.IServices;
-using Friday.ERP.Server.Utilities.PdfGenerator.InvoiceSale;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
@@ -12,12 +11,12 @@ namespace Friday.ERP.Server.Controllers;
 [Authorize]
 public class DownloadController(IServiceManager service, IWebHostEnvironment env) : ControllerBase
 {
-    private readonly string _product_images = Path.Combine(env.WebRootPath, "product_images");
+    private readonly string _productImages = Path.Combine(env.WebRootPath, "product_images");
 
     [HttpGet("sales/{guid:guid}", Name = "DownloadSaleInvoice")]
     public async Task<FileStreamResult> DownloadSaleInvoice(Guid guid)
     {
-        var invoiceSaleViewDto = await service.InvoiceService.GetInvoiceSaleByGuid(guid, _product_images);
+        var invoiceSaleViewDto = await service.InvoiceService.GetInvoiceSaleByGuid(guid, _productImages);
         var settingViewDto = await service.SystemService.GetSettings(env.WebRootPath);
 
         var document = new Document(invoiceSaleViewDto, settingViewDto);

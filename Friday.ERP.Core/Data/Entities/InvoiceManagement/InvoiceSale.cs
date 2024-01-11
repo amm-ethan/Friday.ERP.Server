@@ -21,11 +21,12 @@ public class InvoiceSale
     [Required] [Column("sub_total")] public long SubTotal { get; set; }
 
     [Column("discount")] public long Discount { get; set; }
+
     [Column("discount_type")] public DiscountTypeEnum? DiscountType { get; set; }
 
     [Column("delivery_fees")] public long DeliveryFees { get; set; }
 
-    [Column("other_fees")] public long OtherFees { get; set; }
+    [Required] [Column("total")] public long Total { get; set; }
 
     [Required] [Column("grand_total")] public long GrandTotal { get; set; }
 
@@ -43,9 +44,11 @@ public class InvoiceSale
         {
             Guid = Guid.NewGuid(),
             SubTotal = invoiceSaleCreateDto.SubTotal,
-            Discount = invoiceSaleCreateDto.Discount ?? 0,
+            Discount = invoiceSaleCreateDto.Discount,
             DiscountType = invoiceSaleCreateDto.DiscountType,
+            DeliveryFees = invoiceSaleCreateDto.DeliveryFees,
             Total = invoiceSaleCreateDto.Total,
+            GrandTotal = invoiceSaleCreateDto.GrandTotal,
             PaidTotal = invoiceSaleCreateDto.PaidTotal,
             CreditDebitLeft = invoiceSaleCreateDto.CreditDebitLeft,
             Remark = invoiceSaleCreateDto.Remark,

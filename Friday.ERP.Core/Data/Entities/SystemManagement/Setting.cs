@@ -16,7 +16,7 @@ public class Setting
 
     [Column("description", TypeName = "varchar(256)")]
     public string? Description { get; set; }
-    
+
     [Column("address_one", TypeName = "varchar(256)")]
     public string? AddressOne { get; set; }
 

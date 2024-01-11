@@ -2,8 +2,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Friday.ERP.Core.Data.Entities.CustomerVendorManagement;
 using Friday.ERP.Shared.DataTransferObjects;
+using Friday.ERP.Shared.Enums;
 using Newtonsoft.Json;
-using DiscountType = Friday.ERP.Shared.Enums.DiscountTypeEnum;
 
 namespace Friday.ERP.Core.Data.Entities.InvoiceManagement;
 
@@ -20,11 +20,11 @@ public class InvoicePurchase
 
     [Column("discount")] public long Discount { get; set; }
 
-    [Column("discount_type")] public DiscountType? DiscountType { get; set; }
-    
+    [Column("discount_type")] public DiscountTypeEnum? DiscountType { get; set; }
+
     [Column("delivery_fees")] public long DeliveryFees { get; set; }
-    
-    [Column("other_fees")] public long OtherFees { get; set; }
+
+    [Required] [Column("total")] public long Total { get; set; }
 
     [Required] [Column("grand_total")] public long GrandTotal { get; set; }
 
@@ -46,9 +46,11 @@ public class InvoicePurchase
         {
             Guid = Guid.NewGuid(),
             SubTotal = invoicePurchaseCreateDto.SubTotal,
-            Discount = invoicePurchaseCreateDto.Discount ?? 0,
+            Discount = invoicePurchaseCreateDto.Discount,
             DiscountType = invoicePurchaseCreateDto.DiscountType,
+            DeliveryFees = invoicePurchaseCreateDto.DeliveryFees,
             Total = invoicePurchaseCreateDto.Total,
+            GrandTotal = invoicePurchaseCreateDto.GrandTotal,
             PaidTotal = invoicePurchaseCreateDto.PaidTotal,
             CreditDebitLeft = invoicePurchaseCreateDto.CreditDebitLeft,
             IsPaid = invoicePurchaseCreateDto.IsPaid,

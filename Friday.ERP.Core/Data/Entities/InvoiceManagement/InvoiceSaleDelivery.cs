@@ -10,6 +10,7 @@ public class InvoiceSaleDelivery
 {
     [Key] public Guid Guid { get; set; }
 
+    [Required]
     [Column("delivery_service_name", TypeName = "varchar(50)")]
     public string? DeliveryServiceName { get; set; }
 
@@ -31,7 +32,7 @@ public class InvoiceSaleDelivery
             DeliveryServiceName = invoiceSaleProductCreateDto.DeliveryServiceName,
             DeliveryContactPerson = invoiceSaleProductCreateDto.DeliveryContactPerson,
             DeliveryContactPhone = invoiceSaleProductCreateDto.DeliveryContactPhone,
-            Remark = invoiceSaleProductCreateDto.Remark,
+            Remark = invoiceSaleProductCreateDto.Remark
         };
     }
 

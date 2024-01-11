@@ -28,7 +28,7 @@ public class InvoicePurchaseProduct
             ProductGuid = invoicePurchaseProductCreateDto.ProductGuid,
             Quantity = invoicePurchaseProductCreateDto.Quantity,
             PurchasedPrice = invoicePurchaseProductCreateDto.BuyPrice,
-            TotalPrice = invoicePurchaseProductCreateDto.TotalPrice,
+            Total = invoicePurchaseProductCreateDto.Total,
             PurchasedAt = DateTime.Now
         };
     }
