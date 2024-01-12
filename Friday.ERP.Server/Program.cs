@@ -96,10 +96,10 @@ try
     app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Friday ERP API"); });
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsProduction())
+    if (app.Environment.IsProduction()) 
         app.UseHsts();
-    else
-        app.UseDeveloperExceptionPage();
+    // else
+    //     app.UseDeveloperExceptionPage();
 
     app.UseHttpsRedirection();
 
