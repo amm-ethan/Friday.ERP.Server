@@ -13,11 +13,12 @@ internal class RepositoryContextFactory : IDesignTimeDbContextFactory<Repository
             .AddJsonFile("appsettings.json")
             .Build();
         var builder = new DbContextOptionsBuilder<RepositoryContext>()
-            .UseMySQL(configuration.GetConnectionString("SqlConnection")!,
+            .UseOracle(configuration.GetConnectionString("SqlConnection")!,
                 o =>
                 {
                     o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     o.MigrationsAssembly("Friday.ERP.Server");
+                    o.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19);
                 });
         return new RepositoryContext(builder.Options);
     }

@@ -11,78 +11,71 @@ namespace Friday.ERP.Server.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterDatabase()
-                .Annotation("MySQL:Charset", "utf8mb4");
-
             migrationBuilder.CreateTable(
                 name: "am_user_role",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     name = table.Column<string>(type: "varchar(50)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_am_user_role", x => x.Guid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "cm_customer_vendor",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     code = table.Column<string>(type: "varchar(256)", nullable: false),
                     name = table.Column<string>(type: "varchar(256)", nullable: false),
                     phone = table.Column<string>(type: "varchar(15)", nullable: false),
                     email = table.Column<string>(type: "varchar(50)", nullable: true),
                     address = table.Column<string>(type: "varchar(50)", nullable: true),
-                    customer_vendor_type = table.Column<int>(type: "int", nullable: false),
-                    total_credit_debit_left = table.Column<long>(type: "bigint", nullable: false)
+                    customer_vendor_type = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    total_credit_debit_left = table.Column<long>(type: "NUMBER(19)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_cm_customer_vendor", x => x.Guid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "im_category",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     name = table.Column<string>(type: "varchar(256)", nullable: false),
                     color = table.Column<string>(type: "varchar(256)", nullable: false),
-                    is_active = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    is_active = table.Column<bool>(type: "NUMBER(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_im_category", x => x.Guid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "sm_notification",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     heading = table.Column<string>(type: "varchar(255)", nullable: false),
                     body = table.Column<string>(type: "varchar(255)", nullable: false),
-                    is_system_wide = table.Column<bool>(type: "tinyint(1)", nullable: true),
-                    sent_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                    is_system_wide = table.Column<bool>(type: "NUMBER(1)", nullable: true),
+                    sent_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_sm_notification", x => x.Guid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "sm_setting",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    image = table.Column<string>(type: "longtext", nullable: true),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    image = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
                     name = table.Column<string>(type: "varchar(256)", nullable: false),
                     description = table.Column<string>(type: "varchar(256)", nullable: true),
                     address_one = table.Column<string>(type: "varchar(256)", nullable: true),
@@ -91,28 +84,27 @@ namespace Friday.ERP.Server.Migrations
                     phone_two = table.Column<string>(type: "varchar(100)", nullable: true),
                     phone_three = table.Column<string>(type: "varchar(100)", nullable: true),
                     phone_four = table.Column<string>(type: "varchar(100)", nullable: true),
-                    suggest_sale_price = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    default_profit_percent = table.Column<int>(type: "int", nullable: false),
-                    default_profit_percent_for_whole_sale = table.Column<int>(type: "int", nullable: false),
-                    minimum_stock_margin = table.Column<int>(type: "int", nullable: false)
+                    suggest_sale_price = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    default_profit_percent = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    default_profit_percent_for_whole_sale = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    minimum_stock_margin = table.Column<int>(type: "NUMBER(10)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_sm_setting", x => x.Guid);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "am_user",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     name = table.Column<string>(type: "varchar(50)", nullable: false),
                     phone = table.Column<string>(type: "varchar(50)", nullable: true),
                     email = table.Column<string>(type: "varchar(50)", nullable: true),
                     username = table.Column<string>(type: "varchar(10)", nullable: false),
                     password = table.Column<string>(type: "varchar(100)", nullable: false),
-                    user_role_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    user_role_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -123,27 +115,26 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "am_user_role",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "lm_invoice_purchase",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     invoice_no = table.Column<string>(type: "varchar(50)", nullable: false),
-                    sub_total = table.Column<long>(type: "bigint", nullable: false),
-                    discount = table.Column<long>(type: "bigint", nullable: false),
-                    discount_type = table.Column<int>(type: "int", nullable: true),
-                    delivery_fees = table.Column<long>(type: "bigint", nullable: false),
-                    total = table.Column<long>(type: "bigint", nullable: false),
-                    grand_total = table.Column<long>(type: "bigint", nullable: false),
-                    paid_total = table.Column<long>(type: "bigint", nullable: false),
-                    remark = table.Column<string>(type: "longtext", nullable: true),
-                    credit_debit_left = table.Column<long>(type: "bigint", nullable: false),
-                    is_paid = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    purchased_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    vendor_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    sub_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    discount = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    discount_type = table.Column<int>(type: "NUMBER(10)", nullable: true),
+                    delivery_fees = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    grand_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    paid_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    remark = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
+                    credit_debit_left = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    is_paid = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    purchased_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
+                    vendor_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,26 +145,25 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "cm_customer_vendor",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "lm_invoice_sale",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     invoice_no = table.Column<string>(type: "varchar(50)", nullable: false),
-                    purchased_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    sub_total = table.Column<long>(type: "bigint", nullable: false),
-                    discount = table.Column<long>(type: "bigint", nullable: false),
-                    discount_type = table.Column<int>(type: "int", nullable: true),
-                    delivery_fees = table.Column<long>(type: "bigint", nullable: false),
-                    total = table.Column<long>(type: "bigint", nullable: false),
-                    grand_total = table.Column<long>(type: "bigint", nullable: false),
-                    paid_total = table.Column<long>(type: "bigint", nullable: false),
-                    remark = table.Column<string>(type: "longtext", nullable: true),
-                    credit_debit_left = table.Column<long>(type: "bigint", nullable: false),
-                    customer_guid = table.Column<Guid>(type: "char(36)", nullable: true)
+                    purchased_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
+                    sub_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    discount = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    discount_type = table.Column<int>(type: "NUMBER(10)", nullable: true),
+                    delivery_fees = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    grand_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    paid_total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    remark = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
+                    credit_debit_left = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    customer_guid = table.Column<Guid>(type: "RAW(16)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,20 +174,19 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "cm_customer_vendor",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "im_product",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     code = table.Column<string>(type: "varchar(256)", nullable: false),
-                    image = table.Column<string>(type: "longtext", nullable: true),
+                    image = table.Column<string>(type: "NVARCHAR2(2000)", nullable: true),
                     name = table.Column<string>(type: "varchar(256)", nullable: false),
-                    stock = table.Column<int>(type: "int", nullable: false),
-                    is_active = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    category_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    stock = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    is_active = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    category_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,18 +197,17 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "im_category",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "am_user_login",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     access_token = table.Column<string>(type: "varchar(512)", nullable: false),
                     refresh_token = table.Column<string>(type: "varchar(512)", nullable: false),
-                    refresh_token_expiry_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    user_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    refresh_token_expiry_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
+                    user_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,17 +218,16 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "am_user",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Restrict);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "sm_notification_user",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    have_read = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    notification_guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    user_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    have_read = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    notification_guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    user_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -257,19 +244,18 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "sm_notification",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "lm_invoice_sale_delivery",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
                     delivery_service_name = table.Column<string>(type: "varchar(50)", nullable: false),
                     delivery_contact_person = table.Column<string>(type: "varchar(50)", nullable: true),
                     delivery_contact_phone = table.Column<string>(type: "varchar(50)", nullable: true),
                     remark = table.Column<string>(type: "varchar(50)", nullable: true),
-                    invoice_sale_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    invoice_sale_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -280,19 +266,18 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "lm_invoice_sale",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "im_product_price",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    sale_price = table.Column<long>(type: "bigint", nullable: false),
-                    is_whole_sale = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    is_active = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    action_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    product_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    sale_price = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    is_whole_sale = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    is_active = table.Column<bool>(type: "NUMBER(1)", nullable: false),
+                    action_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
+                    product_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -303,20 +288,19 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "im_product",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "lm_invoice_purchase_product",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false),
-                    purchased_price = table.Column<long>(type: "bigint", nullable: false),
-                    total = table.Column<long>(type: "bigint", nullable: false),
-                    purchased_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    product_guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    invoice_purchase_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    quantity = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    purchased_price = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    purchased_at = table.Column<DateTime>(type: "TIMESTAMP(7)", nullable: false),
+                    product_guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    invoice_purchase_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -328,24 +312,23 @@ namespace Friday.ERP.Server.Migrations
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_lm_invoice_purchase_product_lm_invoice_purchase_invoice_purc~",
+                        name: "FK_lm_invoice_purchase_product_lm_invoice_purchase_invoice_purchase_guid",
                         column: x => x.invoice_purchase_guid,
                         principalTable: "lm_invoice_purchase",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.CreateTable(
                 name: "lm_invoice_sale_product",
                 columns: table => new
                 {
-                    Guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    quantity = table.Column<int>(type: "int", nullable: false),
-                    total = table.Column<long>(type: "bigint", nullable: false),
-                    product_guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    invoice_sale_guid = table.Column<Guid>(type: "char(36)", nullable: false),
-                    product_price_guid = table.Column<Guid>(type: "char(36)", nullable: false)
+                    Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    quantity = table.Column<int>(type: "NUMBER(10)", nullable: false),
+                    total = table.Column<long>(type: "NUMBER(19)", nullable: false),
+                    product_guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    invoice_sale_guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
+                    product_price_guid = table.Column<Guid>(type: "RAW(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -368,8 +351,7 @@ namespace Friday.ERP.Server.Migrations
                         principalTable: "lm_invoice_sale",
                         principalColumn: "Guid",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
+                });
 
             migrationBuilder.InsertData(
                 table: "am_user_role",
@@ -390,7 +372,8 @@ namespace Friday.ERP.Server.Migrations
                 name: "IX_am_user_email",
                 table: "am_user",
                 column: "email",
-                unique: true);
+                unique: true,
+                filter: "\"email\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_am_user_name",
@@ -402,7 +385,8 @@ namespace Friday.ERP.Server.Migrations
                 name: "IX_am_user_phone",
                 table: "am_user",
                 column: "phone",
-                unique: true);
+                unique: true,
+                filter: "\"phone\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_am_user_user_role_guid",
@@ -449,7 +433,8 @@ namespace Friday.ERP.Server.Migrations
                 name: "IX_cm_customer_vendor_email",
                 table: "cm_customer_vendor",
                 column: "email",
-                unique: true);
+                unique: true,
+                filter: "\"email\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_cm_customer_vendor_phone",

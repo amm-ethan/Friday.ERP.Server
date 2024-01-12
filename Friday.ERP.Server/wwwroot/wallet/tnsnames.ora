@@ -1,0 +1,8 @@
+gb6qho6q3sgdujzg_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-singapore-1.oraclecloud.com))(connect_data=(service_name=g385e29e022ffa4_gb6qho6q3sgdujzg_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+gb6qho6q3sgdujzg_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-singapore-1.oraclecloud.com))(connect_data=(service_name=g385e29e022ffa4_gb6qho6q3sgdujzg_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+gb6qho6q3sgdujzg_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.ap-singapore-1.oraclecloud.com))(connect_data=(service_name=g385e29e022ffa4_gb6qho6q3sgdujzg_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+
+

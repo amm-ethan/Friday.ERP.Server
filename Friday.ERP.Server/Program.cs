@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using NLog;
+using Oracle.ManagedDataAccess.Client;
 using QuestPDF;
 using QuestPDF.Drawing;
 using QuestPDF.Infrastructure;
@@ -22,6 +23,9 @@ try
 
     // Get Configuration
     var configuration = builder.Configuration;
+
+    OracleConfiguration.TnsAdmin = "wwwroot/wallet";
+    OracleConfiguration.WalletLocation = OracleConfiguration.TnsAdmin;
 
     // Add services to the container
     builder.Services.ConfigureCors();

@@ -44,13 +44,13 @@ public static class ServiceExtensions
     public static void ConfigureDatabaseContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseMySQL(configuration.GetConnectionString("SqlConnection")!,
+            opts.UseOracle(configuration.GetConnectionString("SqlConnection")!,
                 o =>
                 {
                     o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                     o.MigrationsAssembly("Friday.ERP.Server");
-                })
-        );
+                    o.UseOracleSQLCompatibility(OracleSQLCompatibility.DatabaseVersion19);
+                }));
     }
 
     public static void ConfigureRepositoryManager(this IServiceCollection services)
