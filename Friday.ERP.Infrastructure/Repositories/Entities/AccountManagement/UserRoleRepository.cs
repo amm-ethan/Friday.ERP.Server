@@ -19,8 +19,8 @@ internal sealed class UserRoleRepository(RepositoryContext repositoryContext)
                 .ToListAsync();
 
         var lowerCaseTerm = searchTerm.Trim().ToLower();
-        return await FindByCondition(c => c.Name!.Contains(lowerCaseTerm, StringComparison.CurrentCultureIgnoreCase),
-                trackChanges)
+        return await FindByCondition(c => c.Name!.ToLower().Contains(lowerCaseTerm)
+                , trackChanges)
             .ToListAsync();
     }
 }
