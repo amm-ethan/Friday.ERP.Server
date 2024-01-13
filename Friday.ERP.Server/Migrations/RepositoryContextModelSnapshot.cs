@@ -488,6 +488,21 @@ namespace Friday.ERP.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("RAW(16)");
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("address");
+
+                    b.Property<string>("ContactPerson")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("contact_person");
+
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("contact_phone");
+
                     b.Property<string>("DeliveryContactPerson")
                         .HasColumnType("varchar(50)")
                         .HasColumnName("delivery_contact_person");
@@ -497,7 +512,6 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("delivery_contact_phone");
 
                     b.Property<string>("DeliveryServiceName")
-                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("delivery_service_name");
 

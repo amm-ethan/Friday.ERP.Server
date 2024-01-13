@@ -416,6 +416,9 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
         return new InvoiceSaleDeliveryViewDto
         (
             invoiceSaleDelivery.Guid,
+            invoiceSaleDelivery.Address!,
+            invoiceSaleDelivery.ContactPerson!,
+            invoiceSaleDelivery.ContactPhone!,
             invoiceSaleDelivery.DeliveryServiceName!,
             invoiceSaleDelivery.DeliveryContactPerson,
             invoiceSaleDelivery.DeliveryContactPhone,

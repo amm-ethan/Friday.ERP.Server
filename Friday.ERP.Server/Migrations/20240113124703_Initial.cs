@@ -251,7 +251,10 @@ namespace Friday.ERP.Server.Migrations
                 columns: table => new
                 {
                     Guid = table.Column<Guid>(type: "RAW(16)", nullable: false),
-                    delivery_service_name = table.Column<string>(type: "varchar(50)", nullable: false),
+                    address = table.Column<string>(type: "varchar(50)", nullable: false),
+                    contact_person = table.Column<string>(type: "varchar(50)", nullable: false),
+                    contact_phone = table.Column<string>(type: "varchar(50)", nullable: false),
+                    delivery_service_name = table.Column<string>(type: "varchar(50)", nullable: true),
                     delivery_contact_person = table.Column<string>(type: "varchar(50)", nullable: true),
                     delivery_contact_phone = table.Column<string>(type: "varchar(50)", nullable: true),
                     remark = table.Column<string>(type: "varchar(50)", nullable: true),

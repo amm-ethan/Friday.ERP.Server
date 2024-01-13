@@ -154,7 +154,10 @@ public record InvoiceSaleUpdateDto(
 
 public record InvoiceSaleDeliveryViewDto(
     Guid Guid,
-    string DeliveryServiceName,
+    string Address,
+    string ContactPerson,
+    string ContactPhone,
+    string? DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
     string? Remark
@@ -168,7 +171,10 @@ public record InvoiceSaleDeliveryUpdateDto(
 );
 
 public record InvoiceSaleDeliveryCreateDto(
-    string DeliveryServiceName,
+    string Address,
+    string ContactPerson,
+    string ContactPhone,
+    string? DeliveryServiceName,
     string? DeliveryContactPerson,
     string? DeliveryContactPhone,
     string? Remark
