@@ -344,8 +344,15 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             else
             {
                 var imagePath = Path.Combine(wwwroot, product.Product!.Image!);
-                var imageBytes = File.ReadAllBytes(imagePath);
-                image = Convert.ToBase64String(imageBytes);
+                if (!File.Exists(imagePath))
+                {
+                    var imageBytes = File.ReadAllBytes(imagePath);
+                    image = Convert.ToBase64String(imageBytes);
+                }
+                else
+                {
+                    image = null;
+                }
             }
 
             purchasedProducts.Add(
@@ -439,8 +446,15 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             else
             {
                 var imagePath = Path.Combine(wwwroot, product.Product!.Image!);
-                var imageBytes = File.ReadAllBytes(imagePath);
-                image = Convert.ToBase64String(imageBytes);
+                if (!File.Exists(imagePath))
+                {
+                    var imageBytes = File.ReadAllBytes(imagePath);
+                    image = Convert.ToBase64String(imageBytes);
+                }
+                else
+                {
+                    image = null;
+                }
             }
 
             soldProducts.Add(

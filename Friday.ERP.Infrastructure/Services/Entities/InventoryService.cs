@@ -43,7 +43,6 @@ internal sealed class InventoryService(IRepositoryManager repository, ILoggerMan
         {
             var imageName = $"{product.Code}_{Guid.NewGuid():N}.png";
             var imagePath = Path.Combine(wwwroot, imageName);
-
             var byteArray = Convert.FromBase64String(productCreateDto.Image!);
             await File.WriteAllBytesAsync(imagePath, byteArray);
             product.Image = imageName;
@@ -73,9 +72,16 @@ internal sealed class InventoryService(IRepositoryManager repository, ILoggerMan
             if (createdProduct.Image is not null)
             {
                 var imagePath = Path.Combine(wwwroot, createdProduct.Image!);
-                var imageBytes = await File.ReadAllBytesAsync(imagePath);
-                var base64Image = Convert.ToBase64String(imageBytes);
-                dataToReturn.Add(ToProductViewDto(createdProduct, base64Image));
+                if (File.Exists(imagePath))
+                {
+                    var imageBytes = await File.ReadAllBytesAsync(imagePath);
+                    var base64Image = Convert.ToBase64String(imageBytes);
+                    dataToReturn.Add(ToProductViewDto(createdProduct, base64Image));
+                }
+                else
+                {
+                    dataToReturn.Add(ToProductViewDto(createdProduct, null));
+                }
             }
             else
             {
@@ -94,9 +100,16 @@ internal sealed class InventoryService(IRepositoryManager repository, ILoggerMan
             if (createdProduct.Image is not null)
             {
                 var imagePath = Path.Combine(wwwroot, createdProduct.Image!);
-                var imageBytes = await File.ReadAllBytesAsync(imagePath);
-                var base64Image = Convert.ToBase64String(imageBytes);
-                dataToReturn.Add(ToProductViewDto(createdProduct, base64Image));
+                if (File.Exists(imagePath))
+                {
+                    var imageBytes = await File.ReadAllBytesAsync(imagePath);
+                    var base64Image = Convert.ToBase64String(imageBytes);
+                    dataToReturn.Add(ToProductViewDto(createdProduct, base64Image));
+                }
+                else
+                {
+                    dataToReturn.Add(ToProductViewDto(createdProduct, null));
+                }
             }
             else
             {
@@ -115,6 +128,7 @@ internal sealed class InventoryService(IRepositoryManager repository, ILoggerMan
                 productGuid.ToString());
         if (product.Image is null) return ToProductViewDto(product, null);
         var imagePath = Path.Combine(wwwroot, product.Image!);
+        if (!File.Exists(imagePath)) return ToProductViewDto(product, null);
         var imageBytes = await File.ReadAllBytesAsync(imagePath);
         var base64Image = Convert.ToBase64String(imageBytes);
         return ToProductViewDto(product, base64Image);
