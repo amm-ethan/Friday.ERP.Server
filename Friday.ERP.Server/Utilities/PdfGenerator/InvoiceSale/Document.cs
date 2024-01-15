@@ -133,7 +133,7 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                     column.Item().AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ယခင်ကြွေးကျန်").FontSize(10);
-                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Customer.TotalCreditDebitLeft * -1} ကျပ်")
+                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.ExistingCreditDebit * -1} ကျပ်")
                             .FontSize(10);
                     });
 
