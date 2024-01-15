@@ -344,7 +344,7 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             else
             {
                 var imagePath = Path.Combine(wwwroot, product.Product!.Image!);
-                if (!File.Exists(imagePath))
+                if (File.Exists(imagePath))
                 {
                     var imageBytes = File.ReadAllBytes(imagePath);
                     image = Convert.ToBase64String(imageBytes);
@@ -446,7 +446,7 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             else
             {
                 var imagePath = Path.Combine(wwwroot, product.Product!.Image!);
-                if (!File.Exists(imagePath))
+                if (File.Exists(imagePath))
                 {
                     var imageBytes = File.ReadAllBytes(imagePath);
                     image = Convert.ToBase64String(imageBytes);

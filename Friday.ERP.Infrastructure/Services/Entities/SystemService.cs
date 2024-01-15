@@ -17,7 +17,7 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
                 "");
         if (wwwroot is null) return ToSettingViewDto(setting, null);
         var imagePath = Path.Combine(wwwroot, "logo.png");
-        if (File.Exists(imagePath)) return ToSettingViewDto(setting, null);
+        if (!File.Exists(imagePath)) return ToSettingViewDto(setting, null);
         var imageBytes = await File.ReadAllBytesAsync(imagePath);
         var base64Image = Convert.ToBase64String(imageBytes);
         return ToSettingViewDto(setting, base64Image);
