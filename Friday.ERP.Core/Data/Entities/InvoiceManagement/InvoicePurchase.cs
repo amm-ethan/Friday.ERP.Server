@@ -31,6 +31,10 @@ public class InvoicePurchase
     [Column("remark")] public string? Remark { get; set; }
 
     [Required]
+    [Column("existing_credit_debit")]
+    public long ExistingCreditDebit { get; set; }
+    
+    [Required]
     [Column("credit_debit_left")]
     public long CreditDebitLeft { get; set; }
 
@@ -49,6 +53,7 @@ public class InvoicePurchase
             Total = invoicePurchaseCreateDto.Total,
             GrandTotal = invoicePurchaseCreateDto.GrandTotal,
             PaidTotal = invoicePurchaseCreateDto.PaidTotal,
+            ExistingCreditDebit = invoicePurchaseCreateDto.ExistingCreditDebit,
             CreditDebitLeft = invoicePurchaseCreateDto.CreditDebitLeft,
             IsPaid = invoicePurchaseCreateDto.IsPaid,
             Remark = invoicePurchaseCreateDto.Remark,

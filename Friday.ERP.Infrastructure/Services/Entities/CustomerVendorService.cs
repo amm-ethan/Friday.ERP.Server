@@ -112,7 +112,7 @@ internal sealed class CustomerVendorService(IRepositoryManager repository, ILogg
     public async Task UpdateCustomerVendorCreditDebit(Guid customerVendorGuid, long totalCreditDebitLeft)
     {
         var currentCustomerVendor = await ValidateCustomerVendor(customerVendorGuid, true);
-        currentCustomerVendor.TotalCreditDebitLeft += totalCreditDebitLeft;
+        currentCustomerVendor.TotalCreditDebitLeft = totalCreditDebitLeft;
 
         await repository.SaveAsync();
     }

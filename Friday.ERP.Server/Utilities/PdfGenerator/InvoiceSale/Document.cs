@@ -133,7 +133,7 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                     column.Item().AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ယခင်ကြွေးကျန်").FontSize(10);
-                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Customer.TotalCreditDebitLeft} ကျပ်")
+                        row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Customer.TotalCreditDebitLeft * -1} ကျပ်")
                             .FontSize(10);
                     });
 
@@ -145,21 +145,21 @@ public class Document(InvoiceSaleViewDto invoiceModel, SettingViewDto settingMod
                 }
                 else
                 {
-                    column.Item().AlignRight().Row(row =>
+                    column.Item().PaddingTop(15).AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ပေးရန်စုစုပေါင်း").FontSize(10);
                         row.ConstantItem(100).AlignRight().Text($"{invoiceModel.Total} ကျပ်").FontSize(10);
                     });
                 }
 
-                column.Item().AlignRight().Row(row =>
+                column.Item().PaddingTop(15).AlignRight().Row(row =>
                 {
                     row.ConstantItem(100).AlignRight().Text("ပေးငွေစုစုပေါင်း").FontSize(10);
                     row.ConstantItem(100).AlignRight().Text($"{invoiceModel.PaidTotal} ကျပ်").FontSize(10);
                 });
 
                 if (invoiceModel.Customer is not null)
-                    column.Item().AlignRight().Row(row =>
+                    column.Item().PaddingTop(15).AlignRight().Row(row =>
                     {
                         row.ConstantItem(100).AlignRight().Text("ကျန်ငွေစုစုပေါင်း").FontSize(10);
                         row.ConstantItem(100).AlignRight().Text($"{invoiceModel.CreditDebitLeft} ကျပ်").FontSize(10);

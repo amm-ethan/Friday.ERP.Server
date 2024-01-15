@@ -27,6 +27,7 @@ public record InvoicePurchaseCreateDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     bool IsPaid,
     string? Remark,
@@ -42,6 +43,7 @@ public record InvoicePurchaseViewDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     bool IsPaid,
     string? Remark,
@@ -56,6 +58,7 @@ public record InvoicePurchaseUpdateDto(
     long? Total,
     long? GrandTotal,
     long? PaidTotal,
+    long? ExistingCreditDebit,
     long? CreditDebitLeft,
     bool? IsPaid);
 
@@ -78,6 +81,7 @@ public record InvoicePurchasePreCreateDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     bool IsPaid,
     string? Remark
@@ -112,6 +116,7 @@ public record InvoiceSaleCreateDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     string? Remark,
     Guid? CustomerGuid,
@@ -128,6 +133,7 @@ public record InvoiceSaleViewDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     string? Remark,
     DateTime PurchasedAt,
@@ -142,6 +148,7 @@ public record InvoiceSaleUpdateDto(
     long? Total,
     long? GrandTotal,
     long? PaidTotal,
+    long? ExistingCreditDebit,
     long? CreditDebitLeft
 );
 
@@ -188,6 +195,7 @@ public record InvoiceSalePreCreateDto(
     long Total,
     long GrandTotal,
     long PaidTotal,
+    long ExistingCreditDebit,
     long CreditDebitLeft,
     string? Remark
 );
