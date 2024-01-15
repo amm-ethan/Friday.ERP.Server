@@ -99,8 +99,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
 
         if (invoicePurchaseUpdateDto.Discount is not null)
             invoice.Discount = invoicePurchaseUpdateDto.Discount ?? 0;
-        if (invoicePurchaseUpdateDto.DiscountType is not null)
-            invoice.DiscountType = invoicePurchaseUpdateDto.DiscountType;
         if (invoicePurchaseUpdateDto.DeliveryFees is not null)
             invoice.DeliveryFees = invoicePurchaseUpdateDto.DeliveryFees ?? 0;
         if (invoicePurchaseUpdateDto.Total is not null)
@@ -208,8 +206,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
 
         if (invoiceSaleUpdateDto.Discount is not null)
             invoice.Discount = invoiceSaleUpdateDto.Discount ?? 0;
-        if (invoiceSaleUpdateDto.DiscountType is not null)
-            invoice.DiscountType = invoiceSaleUpdateDto.DiscountType;
         if (invoiceSaleUpdateDto.DeliveryFees is not null)
             invoice.DeliveryFees = invoiceSaleUpdateDto.DeliveryFees ?? 0;
         if (invoiceSaleUpdateDto.Total is not null)
@@ -373,7 +369,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.InvoiceNo!,
             invoice.SubTotal,
             invoice.Discount,
-            invoice.DiscountType,
             invoice.DeliveryFees,
             invoice.Total,
             invoice.GrandTotal,
@@ -477,7 +472,6 @@ internal sealed class InvoiceService(IRepositoryManager repository, ILoggerManag
             invoice.InvoiceNo!,
             invoice.SubTotal,
             invoice.Discount,
-            invoice.DiscountType,
             invoice.DeliveryFees,
             invoice.Total,
             invoice.GrandTotal,

@@ -20,8 +20,6 @@ public class InvoicePurchase
 
     [Column("discount")] public long Discount { get; set; }
 
-    [Column("discount_type")] public DiscountTypeEnum? DiscountType { get; set; }
-
     [Column("delivery_fees")] public long DeliveryFees { get; set; }
 
     [Required] [Column("total")] public long Total { get; set; }
@@ -47,7 +45,6 @@ public class InvoicePurchase
             Guid = Guid.NewGuid(),
             SubTotal = invoicePurchaseCreateDto.SubTotal,
             Discount = invoicePurchaseCreateDto.Discount,
-            DiscountType = invoicePurchaseCreateDto.DiscountType,
             DeliveryFees = invoicePurchaseCreateDto.DeliveryFees,
             Total = invoicePurchaseCreateDto.Total,
             GrandTotal = invoicePurchaseCreateDto.GrandTotal,

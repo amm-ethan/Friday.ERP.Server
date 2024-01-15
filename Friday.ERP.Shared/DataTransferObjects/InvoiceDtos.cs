@@ -23,7 +23,6 @@ public record InvoicePurchaseProductViewDto(
 public record InvoicePurchaseCreateDto(
     long SubTotal,
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
@@ -39,7 +38,6 @@ public record InvoicePurchaseViewDto(
     string InvoiceNo,
     long SubTotal,
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
@@ -54,7 +52,6 @@ public record InvoicePurchaseViewDto(
 
 public record InvoicePurchaseUpdateDto(
     long? Discount,
-    DiscountTypeEnum? DiscountType,
     long? DeliveryFees,
     long? Total,
     long? GrandTotal,
@@ -77,7 +74,6 @@ public record InvoiceIdViewDto(
 
 public record InvoicePurchasePreCreateDto(
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
@@ -112,7 +108,6 @@ public record InvoiceSaleProductViewDto(
 public record InvoiceSaleCreateDto(
     long SubTotal,
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
@@ -129,7 +124,6 @@ public record InvoiceSaleViewDto(
     string InvoiceNo,
     long SubTotal,
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
@@ -144,7 +138,6 @@ public record InvoiceSaleViewDto(
 
 public record InvoiceSaleUpdateDto(
     long? Discount,
-    DiscountTypeEnum? DiscountType,
     long? DeliveryFees,
     long? Total,
     long? GrandTotal,
@@ -191,7 +184,6 @@ public record InvoiceSaleTableViewDto(
 
 public record InvoiceSalePreCreateDto(
     long Discount,
-    DiscountTypeEnum? DiscountType,
     long DeliveryFees,
     long Total,
     long GrandTotal,
