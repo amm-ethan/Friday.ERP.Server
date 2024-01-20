@@ -74,7 +74,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("am_user");
+                    b.ToTable("am_user", (string)null);
 
                     b.HasData(
                         new
@@ -124,7 +124,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("UserGuid")
                         .IsUnique();
 
-                    b.ToTable("am_user_login");
+                    b.ToTable("am_user_login", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.AccountManagement.UserRole", b =>
@@ -143,7 +143,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("am_user_role");
+                    b.ToTable("am_user_role", (string)null);
 
                     b.HasData(
                         new
@@ -202,7 +202,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Phone")
                         .IsUnique();
 
-                    b.ToTable("cm_customer_vendor");
+                    b.ToTable("cm_customer_vendor", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.Category", b =>
@@ -230,7 +230,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("im_category");
+                    b.ToTable("im_category", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.Product", b =>
@@ -276,7 +276,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("im_product");
+                    b.ToTable("im_product", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.ProductPrice", b =>
@@ -310,7 +310,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("ProductGuid");
 
-                    b.ToTable("im_product_price");
+                    b.ToTable("im_product_price", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoicePurchase", b =>
@@ -376,7 +376,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("VendorGuid");
 
-                    b.ToTable("lm_invoice_purchase");
+                    b.ToTable("lm_invoice_purchase", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoicePurchaseProduct", b =>
@@ -417,7 +417,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("ProductGuid");
 
-                    b.ToTable("lm_invoice_purchase_product");
+                    b.ToTable("lm_invoice_purchase_product", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSale", b =>
@@ -479,7 +479,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("CustomerGuid");
 
-                    b.ToTable("lm_invoice_sale");
+                    b.ToTable("lm_invoice_sale", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSaleDelivery", b =>
@@ -529,7 +529,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("InvoiceSaleGuid")
                         .IsUnique();
 
-                    b.ToTable("lm_invoice_sale_delivery");
+                    b.ToTable("lm_invoice_sale_delivery", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSaleProduct", b =>
@@ -566,7 +566,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("ProductPriceGuid");
 
-                    b.ToTable("lm_invoice_sale_product");
+                    b.ToTable("lm_invoice_sale_product", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.Notification", b =>
@@ -595,7 +595,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasKey("Guid");
 
-                    b.ToTable("sm_notification");
+                    b.ToTable("sm_notification", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.NotificationUser", b =>
@@ -624,7 +624,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("UserGuid");
 
-                    b.ToTable("sm_notification_user");
+                    b.ToTable("sm_notification_user", (string)null);
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.Setting", b =>
@@ -688,7 +688,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasKey("Guid");
 
-                    b.ToTable("sm_setting");
+                    b.ToTable("sm_setting", (string)null);
 
                     b.HasData(
                         new

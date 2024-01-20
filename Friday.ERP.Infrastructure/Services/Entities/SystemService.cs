@@ -92,7 +92,7 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
     {
         var notificationUserToUpdate =
             await repository.NotificationUser.GetNotificationUserByNotificationGuidAndUserGuid(guid, userGuid, true);
-        if (notificationUserToUpdate is not null)
+        if (notificationUserToUpdate is null)
             throw new ObjectNotFoundByFilterException("", "NotificationUser",
                 "");
 
