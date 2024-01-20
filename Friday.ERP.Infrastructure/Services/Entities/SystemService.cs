@@ -31,13 +31,13 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
             throw new ObjectNotFoundByFilterException("", "Setting", "");
 
         if (settingUpdateDto.DefaultProfitPercent is not null)
-            setting!.DefaultProfitPercent = settingUpdateDto.DefaultProfitPercent ?? 10;
+            setting.DefaultProfitPercent = settingUpdateDto.DefaultProfitPercent ?? 10;
         if (settingUpdateDto.DefaultProfitPercentForWholeSale is not null)
-            setting!.DefaultProfitPercentForWholeSale = settingUpdateDto.DefaultProfitPercentForWholeSale ?? 10;
+            setting.DefaultProfitPercentForWholeSale = settingUpdateDto.DefaultProfitPercentForWholeSale ?? 10;
         if (settingUpdateDto.MinimumStockMargin is not null)
-            setting!.MinimumStockMargin = settingUpdateDto.MinimumStockMargin ?? 10;
+            setting.MinimumStockMargin = settingUpdateDto.MinimumStockMargin ?? 10;
         if (settingUpdateDto.SuggestSalePrice is not null)
-            setting!.SuggestSalePrice = settingUpdateDto.SuggestSalePrice ?? false;
+            setting.SuggestSalePrice = settingUpdateDto.SuggestSalePrice ?? false;
 
         await repository.SaveAsync();
 
@@ -96,7 +96,7 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
             throw new ObjectNotFoundByFilterException("", "NotificationUser",
                 "");
 
-        notificationUserToUpdate!.HaveRead = true;
+        notificationUserToUpdate.HaveRead = true;
 
         await repository.SaveAsync();
     }
@@ -127,13 +127,13 @@ internal sealed class SystemService(IRepositoryManager repository, ILoggerManage
         Notification notification, NotificationUser notificationUser)
     {
         return new NotificationViewDto
-        (
-            notification.Guid,
-            notification.Heading!,
-            notification.Body!,
-            notificationUser.HaveRead ?? false,
-            notification.SentAt
-        );
+        {
+            Guid = notification.Guid,
+            Heading = notification.Heading!,
+            Body = notification.Body!,
+            HaveRead = notificationUser.HaveRead ?? false,
+            SentAt = notification.SentAt
+        };
     }
 
     #endregion

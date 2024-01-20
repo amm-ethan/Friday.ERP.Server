@@ -5,13 +5,14 @@ public record NotificationCreateDto(
     string Body
 );
 
-public record NotificationViewDto(
-    Guid Guid,
-    string Heading,
-    string Body,
-    bool HaveRead,
-    DateTime SentAt
-);
+public class NotificationViewDto
+{
+    public Guid Guid { get; set; }
+    public string Heading { get; set; }
+    public string Body { get; set; }
+    public bool HaveRead { get; set; }
+    public DateTime SentAt { get; set; }
+}
 
 public record SettingViewDto(
     string? ShopImage,
