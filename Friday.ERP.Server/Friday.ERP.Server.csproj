@@ -16,7 +16,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.21.121"/>
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
         <PackageReference Include="QuestPDF" Version="2023.12.2"/>
         <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.88.7"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>

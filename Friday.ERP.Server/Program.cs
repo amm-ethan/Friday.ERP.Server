@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.ResponseCompression;
 using Newtonsoft.Json;
 using NLog;
-using Oracle.ManagedDataAccess.Client;
 using QuestPDF;
 using QuestPDF.Drawing;
 using QuestPDF.Infrastructure;
@@ -23,9 +22,6 @@ try
 
     // Get Configuration
     var configuration = builder.Configuration;
-
-    OracleConfiguration.TnsAdmin = "wwwroot/wallet";
-    OracleConfiguration.WalletLocation = OracleConfiguration.TnsAdmin;
 
     // Add services to the container
     builder.Services.ConfigureCors();
@@ -96,7 +92,7 @@ try
     app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "Friday ERP API"); });
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsProduction()) 
+    if (app.Environment.IsProduction())
         app.UseHsts();
     // else
     //     app.UseDeveloperExceptionPage();

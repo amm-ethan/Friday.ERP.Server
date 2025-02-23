@@ -3,8 +3,8 @@ using System;
 using Friday.ERP.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
@@ -17,16 +17,16 @@ namespace Friday.ERP.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.AccountManagement.User", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .HasColumnType("varchar(50)")
@@ -48,7 +48,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.Property<Guid?>("UserRoleGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("user_role_guid");
 
                     b.Property<string>("Username")
@@ -59,22 +59,20 @@ namespace Friday.ERP.Server.Migrations
                     b.HasKey("Guid");
 
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("\"email\" IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("Phone")
-                        .IsUnique()
-                        .HasFilter("\"phone\" IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserRoleGuid");
 
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("am_user", (string)null);
+                    b.ToTable("am_user");
 
                     b.HasData(
                         new
@@ -92,7 +90,7 @@ namespace Friday.ERP.Server.Migrations
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AccessToken")
                         .IsRequired()
@@ -105,12 +103,12 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("refresh_token");
 
                     b.Property<DateTime>("RefreshTokenExpiryAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("refresh_token_expiry_at");
 
                     b.Property<Guid?>("UserGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("user_guid");
 
                     b.HasKey("Guid");
@@ -124,14 +122,14 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("UserGuid")
                         .IsUnique();
 
-                    b.ToTable("am_user_login", (string)null);
+                    b.ToTable("am_user_login");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.AccountManagement.UserRole", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -143,7 +141,7 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("am_user_role", (string)null);
+                    b.ToTable("am_user_role");
 
                     b.HasData(
                         new
@@ -157,7 +155,7 @@ namespace Friday.ERP.Server.Migrations
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
                         .HasColumnType("varchar(50)")
@@ -169,7 +167,7 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("code");
 
                     b.Property<int>("CustomerVendorType")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("customer_vendor_type");
 
                     b.Property<string>("Email")
@@ -187,7 +185,7 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("phone");
 
                     b.Property<long>("TotalCreditDebitLeft")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("total_credit_debit_left");
 
                     b.HasKey("Guid");
@@ -196,20 +194,19 @@ namespace Friday.ERP.Server.Migrations
                         .IsUnique();
 
                     b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("\"email\" IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("Phone")
                         .IsUnique();
 
-                    b.ToTable("cm_customer_vendor", (string)null);
+                    b.ToTable("cm_customer_vendor");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.Category", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -217,7 +214,7 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("color");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_active");
 
                     b.Property<string>("Name")
@@ -230,18 +227,18 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("im_category", (string)null);
+                    b.ToTable("im_category");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.Product", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid?>("CategoryGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("category_guid");
 
                     b.Property<string>("Code")
@@ -250,11 +247,11 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("code");
 
                     b.Property<string>("Image")
-                        .HasColumnType("NVARCHAR2(2000)")
+                        .HasColumnType("longtext")
                         .HasColumnName("image");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_active");
 
                     b.Property<string>("Name")
@@ -263,7 +260,7 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("name");
 
                     b.Property<int>("Stock")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("stock");
 
                     b.HasKey("Guid");
@@ -276,67 +273,67 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("im_product", (string)null);
+                    b.ToTable("im_product");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InventoryManagement.ProductPrice", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("ActionAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("action_at");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_active");
 
                     b.Property<bool>("IsWholeSale")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_whole_sale");
 
                     b.Property<Guid?>("ProductGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("product_guid");
 
                     b.Property<long>("SalePrice")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("sale_price");
 
                     b.HasKey("Guid");
 
                     b.HasIndex("ProductGuid");
 
-                    b.ToTable("im_product_price", (string)null);
+                    b.ToTable("im_product_price");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoicePurchase", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("CreditDebitLeft")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("credit_debit_left");
 
                     b.Property<long>("DeliveryFees")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("delivery_fees");
 
                     b.Property<long>("Discount")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("discount");
 
                     b.Property<long>("ExistingCreditDebit")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("existing_credit_debit");
 
                     b.Property<long>("GrandTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("grand_total");
 
                     b.Property<string>("InvoiceNo")
@@ -345,70 +342,70 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("invoice_no");
 
                     b.Property<bool>("IsPaid")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_paid");
 
                     b.Property<long>("PaidTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("paid_total");
 
                     b.Property<DateTime>("PurchasedAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("purchased_at");
 
                     b.Property<string>("Remark")
-                        .HasColumnType("NVARCHAR2(2000)")
+                        .HasColumnType("longtext")
                         .HasColumnName("remark");
 
                     b.Property<long>("SubTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("sub_total");
 
                     b.Property<long>("Total")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("total");
 
                     b.Property<Guid>("VendorGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("vendor_guid");
 
                     b.HasKey("Guid");
 
                     b.HasIndex("VendorGuid");
 
-                    b.ToTable("lm_invoice_purchase", (string)null);
+                    b.ToTable("lm_invoice_purchase");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoicePurchaseProduct", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid?>("InvoicePurchaseGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("invoice_purchase_guid");
 
                     b.Property<Guid?>("ProductGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("product_guid");
 
                     b.Property<DateTime>("PurchasedAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("purchased_at");
 
                     b.Property<long>("PurchasedPrice")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("purchased_price");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("quantity");
 
                     b.Property<long>("Total")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("total");
 
                     b.HasKey("Guid");
@@ -417,37 +414,37 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("ProductGuid");
 
-                    b.ToTable("lm_invoice_purchase_product", (string)null);
+                    b.ToTable("lm_invoice_purchase_product");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSale", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<long>("CreditDebitLeft")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("credit_debit_left");
 
                     b.Property<Guid?>("CustomerGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("customer_guid");
 
                     b.Property<long>("DeliveryFees")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("delivery_fees");
 
                     b.Property<long>("Discount")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("discount");
 
                     b.Property<long>("ExistingCreditDebit")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("existing_credit_debit");
 
                     b.Property<long>("GrandTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("grand_total");
 
                     b.Property<string>("InvoiceNo")
@@ -456,37 +453,37 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("invoice_no");
 
                     b.Property<long>("PaidTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("paid_total");
 
                     b.Property<DateTime>("PurchasedAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("purchased_at");
 
                     b.Property<string>("Remark")
-                        .HasColumnType("NVARCHAR2(2000)")
+                        .HasColumnType("longtext")
                         .HasColumnName("remark");
 
                     b.Property<long>("SubTotal")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("sub_total");
 
                     b.Property<long>("Total")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("total");
 
                     b.HasKey("Guid");
 
                     b.HasIndex("CustomerGuid");
 
-                    b.ToTable("lm_invoice_sale", (string)null);
+                    b.ToTable("lm_invoice_sale");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSaleDelivery", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -517,7 +514,7 @@ namespace Friday.ERP.Server.Migrations
 
                     b.Property<Guid?>("InvoiceSaleGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("invoice_sale_guid");
 
                     b.Property<string>("Remark")
@@ -529,33 +526,33 @@ namespace Friday.ERP.Server.Migrations
                     b.HasIndex("InvoiceSaleGuid")
                         .IsUnique();
 
-                    b.ToTable("lm_invoice_sale_delivery", (string)null);
+                    b.ToTable("lm_invoice_sale_delivery");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.InvoiceManagement.InvoiceSaleProduct", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("InvoiceSaleGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("invoice_sale_guid");
 
                     b.Property<Guid>("ProductGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("product_guid");
 
                     b.Property<Guid>("ProductPriceGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("product_price_guid");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("quantity");
 
                     b.Property<long>("Total")
-                        .HasColumnType("NUMBER(19)")
+                        .HasColumnType("bigint")
                         .HasColumnName("total");
 
                     b.HasKey("Guid");
@@ -566,14 +563,14 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("ProductPriceGuid");
 
-                    b.ToTable("lm_invoice_sale_product", (string)null);
+                    b.ToTable("lm_invoice_sale_product");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.Notification", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Body")
                         .IsRequired()
@@ -586,36 +583,36 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("heading");
 
                     b.Property<bool?>("IsSystemWide")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_system_wide");
 
                     b.Property<DateTime>("SentAt")
-                        .HasColumnType("TIMESTAMP(7)")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("sent_at");
 
                     b.HasKey("Guid");
 
-                    b.ToTable("sm_notification", (string)null);
+                    b.ToTable("sm_notification");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.NotificationUser", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<bool?>("HaveRead")
                         .IsRequired()
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("have_read");
 
                     b.Property<Guid>("NotificationGuid")
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("notification_guid");
 
                     b.Property<Guid?>("UserGuid")
                         .IsRequired()
-                        .HasColumnType("RAW(16)")
+                        .HasColumnType("char(36)")
                         .HasColumnName("user_guid");
 
                     b.HasKey("Guid");
@@ -624,14 +621,14 @@ namespace Friday.ERP.Server.Migrations
 
                     b.HasIndex("UserGuid");
 
-                    b.ToTable("sm_notification_user", (string)null);
+                    b.ToTable("sm_notification_user");
                 });
 
             modelBuilder.Entity("Friday.ERP.Core.Data.Entities.SystemManagement.Setting", b =>
                 {
                     b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("RAW(16)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AddressOne")
                         .HasColumnType("varchar(256)")
@@ -642,11 +639,11 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("address_two");
 
                     b.Property<int>("DefaultProfitPercent")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("default_profit_percent");
 
                     b.Property<int>("DefaultProfitPercentForWholeSale")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("default_profit_percent_for_whole_sale");
 
                     b.Property<string>("Description")
@@ -654,11 +651,11 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("Image")
-                        .HasColumnType("NVARCHAR2(2000)")
+                        .HasColumnType("longtext")
                         .HasColumnName("image");
 
                     b.Property<int>("MinimumStockMargin")
-                        .HasColumnType("NUMBER(10)")
+                        .HasColumnType("int")
                         .HasColumnName("minimum_stock_margin");
 
                     b.Property<string>("Name")
@@ -683,12 +680,12 @@ namespace Friday.ERP.Server.Migrations
                         .HasColumnName("phone_two");
 
                     b.Property<bool>("SuggestSalePrice")
-                        .HasColumnType("NUMBER(1)")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("suggest_sale_price");
 
                     b.HasKey("Guid");
 
-                    b.ToTable("sm_setting", (string)null);
+                    b.ToTable("sm_setting");
 
                     b.HasData(
                         new
